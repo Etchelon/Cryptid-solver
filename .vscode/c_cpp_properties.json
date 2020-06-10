@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}",
+                "${workspaceFolder}/../Cryptid-debug/fmt-6.2.0+2/upstream/include",
+                "${workspaceFolder}/../Cryptid-debug/nlohmann-json-3.7.3/upstream/single_include",
+                "C:/mongo-cxx-driver",
+                "C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/VC/Tools/MSVC/14.26.28801/ATLMFC/include",
+                "C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/VC/Tools/MSVC/14.26.28801/include",
+                "C:/Program Files (x86)/Windows Kits/NETFXSDK/4.8/include/um",
+                "C:/Program Files (x86)/Windows Kits/10/include/10.0.18362.0/ucrt",
+                "C:/Program Files (x86)/Windows Kits/10/include/10.0.18362.0/shared",
+                "C:/Program Files (x86)/Windows Kits/10/include/10.0.18362.0/um",
+                "C:/Program Files (x86)/Windows Kits/10/include/10.0.18362.0/winrt",
+                "C:/Program Files (x86)/Windows Kits/10/include/10.0.18362.0/cppwinrt"
+            ],
+            "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/VC/Tools/MSVC/14.26.28801/bin/Hostx64/x64/cl.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "msvc-x64"
+        }
+    ],
+    "version": 4
+}
