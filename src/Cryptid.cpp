@@ -1,4 +1,4 @@
-#include "map/sector.hxx"
+#include "map/sector.hpp"
 #include <algorithm>
 #include <exception>
 #include <filesystem>
@@ -25,7 +25,7 @@ auto main(int argc, char* argv[]) -> int {
 	using namespace Cryptid::Map;
 	namespace fs = std::filesystem;
 
-	auto sectorDefPath = fs::current_path() / "map" / "sectors.json";
+	auto sectorDefPath = fs::current_path() / "src" / "map" / "sectors.json";
 	auto sectorsStr = readFile(sectorDefPath);
 
 	using nlohmann::json;
@@ -42,8 +42,29 @@ auto main(int argc, char* argv[]) -> int {
 		sectorDefs.cbegin(), sectorDefs.cend(), [](const SectorDefinition& sec) { return sec.initialized(); });
 	std::cout << nInitialized << " elements initialized\n";
 
-	auto mapStateFilePath = fs::current_path() / "map" / "state.json";
+	auto mapStateFilePath = fs::current_path() / "src" / "state.json";
 	auto mapStateStr = readFile(mapStateFilePath);
+	auto mapState = json::parse(mapStateStr);
+	auto sectorsState = mapState.at("sectors").items();
+	for (const auto& [key, value] : sectorsState) {
+		auto sectorId = value.at("id").get<int>();
+		auto sectorSlot = value.at("slot").get<int>();
+		auto sectorFlipped = value.at("flipped").get<bool>();
+
+		auto sectorIt = std::find_if(sectorDefs.begin(), sectorDefs.end(),
+			[sectorId](const SectorDefinition& sec) { return sec.id_ == sectorId; });
+		if (sectorIt == sectorDefs.end()) {
+			throw std::runtime_error{ fmt::format("Sector with id {} not found among definitions", sectorId) };
+		}
+
+		auto& sectorDef = *sectorIt;
+		std::for_each(
+			sectorDef.hexes_.begin(), sectorDef.hexes_.end(), [sectorSlot](Hex& h) { h.setPosition(sectorSlot); });
+	}
+
+	nInitialized = std::count_if(
+		sectorDefs.cbegin(), sectorDefs.cend(), [](const SectorDefinition& sec) { return sec.initialized(); });
+	std::cout << nInitialized << " elements initialized\n";
 
 	return 0;
 }

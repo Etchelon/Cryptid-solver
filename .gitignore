@@ -1,8 +1,6 @@
-.bdep/
-
-# Local default options files.
+# CMake build files.
 #
-.build2/local/
+build/
 
 # Compiler/linker output.
 #

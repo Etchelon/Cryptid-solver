@@ -1,6 +1,6 @@
 #pragma once
 
-#include "shared.hxx"
+#include "shared.hpp"
 #include <exception>
 #include <fmt/core.h>
 #include <nlohmann/json.hpp>
@@ -21,7 +21,7 @@ namespace Cryptid { namespace Map {
 			: sectorId_{ sectorId }, index_{ index }, terrainType_{ terrainType }, animalTerritoryType_{
 				  animalTerritoryType
 			  } {
-			id_ = fmt::format("{}-{}", std::to_string(sectorId), std::to_string(index));
+			id_ = fmt::format("{}-{}", sectorId, index);
 		}
 
 		// Setters
@@ -64,8 +64,7 @@ namespace Cryptid { namespace Map {
 
 		auto structure() const -> Structure {
 			if (!hasStructure()) {
-				auto message = "";
-				// auto message = fmt::format("Hex {} in sector {} has no structure", index_, sectorId_);
+				auto message = fmt::format("Hex {} in sector {} has no structure", index_, sectorId_);
 				throw std::runtime_error{ message };
 			}
 			return structure_.value();
@@ -77,8 +76,7 @@ namespace Cryptid { namespace Map {
 
 		auto animalTerritoryType() const -> AnimalTerritoryType {
 			if (!hasAnimalTerritory()) {
-				auto message = "";
-				// auto message = fmt::format("Hex {} in sector {} has no animal territory", index_, sectorId_);
+				auto message = fmt::format("Hex {} in sector {} has no animal territory", index_, sectorId_);
 				throw std::runtime_error{ message };
 			}
 			return animalTerritoryType_.value();

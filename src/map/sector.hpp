@@ -1,6 +1,6 @@
 #pragma once
 
-#include "hex.hxx"
+#include "hex.hpp"
 #include <algorithm>
 #include <iostream>
 #include <vector>

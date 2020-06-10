@@ -1,0 +1,41 @@
+{
+    "difficulty": 0,
+    "players": ["alpha", "beta", "gamma"],
+    "sectors": [
+        {
+            "id": 1,
+            "slot": 1,
+            "flipped": true
+        },
+        {
+            "id": 2,
+            "slot": 4,
+            "flipped": false
+        },
+        {
+            "id": 3,
+            "slot": 0,
+            "flipped": false
+        },
+        {
+            "id": 4,
+            "slot": 5,
+            "flipped": true
+        },
+        {
+            "id": 5,
+            "slot": 3,
+            "flipped": false
+        },
+        {
+            "id": 6,
+            "slot": 2,
+            "flipped": true
+        }
+    ],
+    "structures": [{
+        "type": 0,
+        "color": 0,
+        "hexId": "1-17"
+    }]
+}

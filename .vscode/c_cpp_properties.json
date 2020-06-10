@@ -4,9 +4,9 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}",
-                "${workspaceFolder}/../Cryptid-debug/fmt-6.2.0+2/upstream/include",
-                "${workspaceFolder}/../Cryptid-debug/nlohmann-json-3.7.3/upstream/single_include",
                 "C:/mongo-cxx-driver",
+                "C:/Users/andre/.conan/data/fmt/6.2.1/_/_/package/d057732059ea44a47760900cb5e4855d2bea8714/include",
+                "C:/Users/andre/.conan/data/nlohmann_json/3.7.3/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include",
                 "C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/VC/Tools/MSVC/14.26.28801/ATLMFC/include",
                 "C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/VC/Tools/MSVC/14.26.28801/include",
                 "C:/Program Files (x86)/Windows Kits/NETFXSDK/4.8/include/um",
