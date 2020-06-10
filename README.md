@@ -1,3 +1,3 @@
-# Cryptid
+# Cryptid-solver
 
-C++ executable
+Implementation of a solver engine for the Cryptid board game
