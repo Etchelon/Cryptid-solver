@@ -2,9 +2,10 @@
 
 #include "shared.hxx"
 #include <exception>
-#include <fmt/format.h>
+#include <fmt/core.h>
 #include <nlohmann/json.hpp>
 #include <optional>
+#include <string>
 #include <string_view>
 #include <tuple>
 
@@ -19,7 +20,9 @@ namespace Cryptid { namespace Map {
 			std::optional<AnimalTerritoryType> animalTerritoryType = std::nullopt)
 			: sectorId_{ sectorId }, index_{ index }, terrainType_{ terrainType }, animalTerritoryType_{
 				  animalTerritoryType
-			  } {}
+			  } {
+			id_ = fmt::format("{}-{}", std::to_string(sectorId), std::to_string(index));
+		}
 
 		// Setters
 
@@ -34,6 +37,10 @@ namespace Cryptid { namespace Map {
 		}
 
 		// Getters
+
+		auto id() const noexcept -> const std::string& {
+			return id_;
+		}
 
 		auto initialized() const noexcept -> bool {
 			return initialized_;
@@ -57,7 +64,9 @@ namespace Cryptid { namespace Map {
 
 		auto structure() const -> Structure {
 			if (!hasStructure()) {
-				throw std::runtime_error{ fmt::format("Hex {} in sector {} has no structure", index_, sectorId_) };
+				auto message = "";
+				// auto message = fmt::format("Hex {} in sector {} has no structure", index_, sectorId_);
+				throw std::runtime_error{ message };
 			}
 			return structure_.value();
 		}
@@ -68,14 +77,16 @@ namespace Cryptid { namespace Map {
 
 		auto animalTerritoryType() const -> AnimalTerritoryType {
 			if (!hasAnimalTerritory()) {
-				throw std::runtime_error{ fmt::format(
-					"Hex {} in sector {} has no animal territory", index_, sectorId_) };
+				auto message = "";
+				// auto message = fmt::format("Hex {} in sector {} has no animal territory", index_, sectorId_);
+				throw std::runtime_error{ message };
 			}
 			return animalTerritoryType_.value();
 		}
 
 	private:
 		bool initialized_ = false;
+		std::string id_;
 		int sectorId_;
 		int sectorSlot_;
 		int index_;
@@ -88,12 +99,3 @@ namespace Cryptid { namespace Map {
 }}	 // namespace Cryptid::Map
 
 using namespace Cryptid::Map;
-
-template<>
-struct fmt::formatter<Hex> : fmt::formatter<std::string_view> {
-	template<typename FormatContext>
-	auto format(const Hex& hex, FormatContext& ctx) const {
-		auto type = toString(hex.terrainType_);
-		return format_to(ctx.out(), "Terrain: {}", type);
-	}
-};

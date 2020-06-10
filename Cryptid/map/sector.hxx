@@ -1,8 +1,8 @@
 #pragma once
 
 #include "hex.hxx"
+#include <algorithm>
 #include <iostream>
-#include <range/v3/all.hpp>
 #include <vector>
 
 namespace Cryptid { namespace Map {
@@ -14,7 +14,7 @@ namespace Cryptid { namespace Map {
 		explicit SectorDefinition(int id, std::vector<Hex> hexes) : id_{ id }, hexes_{ std::move(hexes) } {}
 
 		auto initialized() const noexcept -> bool {
-			return hexes_ | ranges::views::all([](const Hex& h) const -> bool { return h.initialized(); })
+			return std::all_of(hexes_.cbegin(), hexes_.cend(), [](const Hex& h) { return h.initialized(); });
 		}
 
 	public:
@@ -27,8 +27,7 @@ namespace Cryptid { namespace Map {
 	auto from_json(const json& j, SectorDefinition& sectorDef) -> void {
 		j.at("id").get_to(sectorDef.id_);
 		auto jHexes = j.at("hexes");
-		std::vector<Hex> hexes;
-		hexes.reserve(N_HEXES_PER_SECTOR);
+		std::vector<Hex> hexes{ N_HEXES_PER_SECTOR };
 		for (const auto& [key, jHex] : jHexes.items()) {
 			int index = std::stoi(key);
 			auto terrainType = jHex.at("terrainType").get<TerrainType>();
