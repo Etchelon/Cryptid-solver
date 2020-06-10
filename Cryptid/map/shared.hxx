@@ -12,7 +12,7 @@ namespace Cryptid { namespace Map {
 		Swamp
 	};
 
-	auto toString(TerrainType type) -> std::string {
+	inline auto toString(TerrainType type) -> std::string {
 		switch (type) {
 		case TerrainType::Desert:
 			return "Desert";
@@ -35,7 +35,7 @@ namespace Cryptid { namespace Map {
 		White
 	};
 
-	auto toString(StructureColor color) -> std::string {
+	inline auto toString(StructureColor color) -> std::string {
 		switch (color) {
 		case StructureColor::Black:
 			return "Black";
@@ -50,16 +50,16 @@ namespace Cryptid { namespace Map {
 
 	enum class StructureType
 	{
-		AbandonedTent,
-		Menhir
+		AbandonedShack,
+		StandingStone
 	};
 
-	auto toString(StructureType type) -> std::string {
+	inline auto toString(StructureType type) -> std::string {
 		switch (type) {
-		case StructureType::AbandonedTent:
-			return "Abandoned Tent";
-		case StructureType::Menhir:
-			return "Menhir";
+		case StructureType::AbandonedShack:
+			return "Abandoned Shack";
+		case StructureType::StandingStone:
+			return "Standing Stone";
 		}
 	}
 
@@ -69,7 +69,7 @@ namespace Cryptid { namespace Map {
 		Puma
 	};
 
-	auto toString(AnimalTerritoryType type) -> std::string {
+	inline auto toString(AnimalTerritoryType type) -> std::string {
 		switch (type) {
 		case AnimalTerritoryType::Bear:
 			return "Bear";

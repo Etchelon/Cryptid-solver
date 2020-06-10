@@ -1,6 +1,480 @@
-[{
-    "id": 1,
-    "hexes": [{
-        
-    }]
-}]
+[
+    {
+        "id": 1,
+        "hexes": [
+            {
+                "index": 0,
+                "terrainType": 3
+            },
+            {
+                "index": 1,
+                "terrainType": 3
+            },
+            {
+                "index": 2,
+                "terrainType": 3
+            },
+            {
+                "index": 3,
+                "terrainType": 3
+            },
+            {
+                "index": 4,
+                "terrainType": 1
+            },
+            {
+                "index": 5,
+                "terrainType": 1
+            },
+            {
+                "index": 6,
+                "terrainType": 4
+            },
+            {
+                "index": 7,
+                "terrainType": 4
+            },
+            {
+                "index": 8,
+                "terrainType": 3
+            },
+            {
+                "index": 9,
+                "terrainType": 0
+            },
+            {
+                "index": 10,
+                "terrainType": 1
+            },
+            {
+                "index": 11,
+                "terrainType": 1
+            },
+            {
+                "index": 12,
+                "terrainType": 4
+            },
+            {
+                "index": 13,
+                "terrainType": 4
+            },
+            {
+                "index": 14,
+                "terrainType": 0
+            },
+            {
+                "index": 15,
+                "terrainType": 0,
+                "animalTerritoryType": 0
+            },
+            {
+                "index": 16,
+                "terrainType": 0,
+                "animalTerritoryType": 0
+            },
+            {
+                "index": 17,
+                "terrainType": 1,
+                "animalTerritoryType": 0
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "hexes": [
+            {
+                "index": 0,
+                "terrainType": 4,
+                "animalTerritoryType": 1
+            },
+            {
+                "index": 1,
+                "terrainType": 1,
+                "animalTerritoryType": 1
+            },
+            {
+                "index": 2,
+                "terrainType": 1,
+                "animalTerritoryType": 1
+            },
+            {
+                "index": 3,
+                "terrainType": 1
+            },
+            {
+                "index": 4,
+                "terrainType": 1
+            },
+            {
+                "index": 5,
+                "terrainType": 1
+            },
+            {
+                "index": 6,
+                "terrainType": 4
+            },
+            {
+                "index": 7,
+                "terrainType": 4
+            },
+            {
+                "index": 8,
+                "terrainType": 1
+            },
+            {
+                "index": 9,
+                "terrainType": 0
+            },
+            {
+                "index": 10,
+                "terrainType": 0
+            },
+            {
+                "index": 11,
+                "terrainType": 0
+            },
+            {
+                "index": 12,
+                "terrainType": 4
+            },
+            {
+                "index": 13,
+                "terrainType": 2
+            },
+            {
+                "index": 14,
+                "terrainType": 2
+            },
+            {
+                "index": 15,
+                "terrainType": 2
+            },
+            {
+                "index": 16,
+                "terrainType": 2
+            },
+            {
+                "index": 17,
+                "terrainType": 0
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "hexes": [
+            {
+                "index": 0,
+                "terrainType": 4
+            },
+            {
+                "index": 1,
+                "terrainType": 4
+            },
+            {
+                "index": 2,
+                "terrainType": 1
+            },
+            {
+                "index": 3,
+                "terrainType": 1
+            },
+            {
+                "index": 4,
+                "terrainType": 1
+            },
+            {
+                "index": 5,
+                "terrainType": 3
+            },
+            {
+                "index": 6,
+                "terrainType": 4,
+                "animalTerritoryType": 1
+            },
+            {
+                "index": 7,
+                "terrainType": 4,
+                "animalTerritoryType": 1
+            },
+            {
+                "index": 8,
+                "terrainType": 1
+            },
+            {
+                "index": 9,
+                "terrainType": 2
+            },
+            {
+                "index": 10,
+                "terrainType": 3
+            },
+            {
+                "index": 11,
+                "terrainType": 3
+            },
+            {
+                "index": 12,
+                "terrainType": 2,
+                "animalTerritoryType": 1
+            },
+            {
+                "index": 13,
+                "terrainType": 2
+            },
+            {
+                "index": 14,
+                "terrainType": 2
+            },
+            {
+                "index": 15,
+                "terrainType": 2
+            },
+            {
+                "index": 16,
+                "terrainType": 3
+            },
+            {
+                "index": 17,
+                "terrainType": 3
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "hexes": [
+            {
+                "index": 0,
+                "terrainType": 0
+            },
+            {
+                "index": 1,
+                "terrainType": 0
+            },
+            {
+                "index": 2,
+                "terrainType": 2
+            },
+            {
+                "index": 3,
+                "terrainType": 2
+            },
+            {
+                "index": 4,
+                "terrainType": 2
+            },
+            {
+                "index": 5,
+                "terrainType": 2
+            },
+            {
+                "index": 6,
+                "terrainType": 0
+            },
+            {
+                "index": 7,
+                "terrainType": 0
+            },
+            {
+                "index": 8,
+                "terrainType": 2
+            },
+            {
+                "index": 9,
+                "terrainType": 3
+            },
+            {
+                "index": 10,
+                "terrainType": 3
+            },
+            {
+                "index": 11,
+                "terrainType": 3,
+                "animalTerritoryType": 1
+            },
+            {
+                "index": 12,
+                "terrainType": 0
+            },
+            {
+                "index": 13,
+                "terrainType": 0
+            },
+            {
+                "index": 14,
+                "terrainType": 0
+            },
+            {
+                "index": 15,
+                "terrainType": 1
+            },
+            {
+                "index": 16,
+                "terrainType": 1
+            },
+            {
+                "index": 17,
+                "terrainType": 1,
+                "animalTerritoryType": 1
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "hexes": [
+            {
+                "index": 0,
+                "terrainType": 4
+            },
+            {
+                "index": 1,
+                "terrainType": 4
+            },
+            {
+                "index": 2,
+                "terrainType": 4
+            },
+            {
+                "index": 3,
+                "terrainType": 2
+            },
+            {
+                "index": 4,
+                "terrainType": 2
+            },
+            {
+                "index": 5,
+                "terrainType": 2
+            },
+            {
+                "index": 6,
+                "terrainType": 4
+            },
+            {
+                "index": 7,
+                "terrainType": 0
+            },
+            {
+                "index": 8,
+                "terrainType": 0
+            },
+            {
+                "index": 9,
+                "terrainType": 3
+            },
+            {
+                "index": 10,
+                "terrainType": 2
+            },
+            {
+                "index": 11,
+                "terrainType": 2,
+                "animalTerritoryType": 0
+            },
+            {
+                "index": 12,
+                "terrainType": 0
+            },
+            {
+                "index": 13,
+                "terrainType": 0
+            },
+            {
+                "index": 14,
+                "terrainType": 3
+            },
+            {
+                "index": 15,
+                "terrainType": 3
+            },
+            {
+                "index": 16,
+                "terrainType": 3,
+                "animalTerritoryType": 0
+            },
+            {
+                "index": 17,
+                "terrainType": 3,
+                "animalTerritoryType": 0
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "hexes": [
+            {
+                "index": 0,
+                "terrainType": 0,
+                "animalTerritoryType": 0
+            },
+            {
+                "index": 1,
+                "terrainType": 0
+            },
+            {
+                "index": 2,
+                "terrainType": 4
+            },
+            {
+                "index": 3,
+                "terrainType": 4
+            },
+            {
+                "index": 4,
+                "terrainType": 4
+            },
+            {
+                "index": 5,
+                "terrainType": 1
+            },
+            {
+                "index": 6,
+                "terrainType": 2,
+                "animalTerritoryType": 0
+            },
+            {
+                "index": 7,
+                "terrainType": 2
+            },
+            {
+                "index": 8,
+                "terrainType": 4
+            },
+            {
+                "index": 9,
+                "terrainType": 4
+            },
+            {
+                "index": 10,
+                "terrainType": 1
+            },
+            {
+                "index": 11,
+                "terrainType": 1
+            },
+            {
+                "index": 12,
+                "terrainType": 2
+            },
+            {
+                "index": 13,
+                "terrainType": 3
+            },
+            {
+                "index": 14,
+                "terrainType": 3
+            },
+            {
+                "index": 15,
+                "terrainType": 3
+            },
+            {
+                "index": 16,
+                "terrainType": 3
+            },
+            {
+                "index": 17,
+                "terrainType": 1
+            }
+        ]
+    }
+]

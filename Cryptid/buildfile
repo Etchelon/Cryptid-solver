@@ -1,7 +1,8 @@
 libs =
 import libs += fmt%lib{fmt}
 import libs += nlohmann-json%lib{json}
+include C:/Code/C++/vcpkg/packages/range-v3_x86-windows/include/
 
-exe{Cryptid}: {hxx ixx mxx txx cxx}{**} $libs testscript
+exe{Cryptid}: {hxx ixx mxx txx cxx}{**} {hxx}{C:/Code/C++/vcpkg/packages/range-v3_x86-windows/include/**} $libs testscript
 
 cxx.poptions =+ "-I$out_root" "-I$src_root"

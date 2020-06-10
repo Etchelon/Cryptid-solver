@@ -7,6 +7,7 @@
                 "${workspaceFolder}/../Cryptid-debug/fmt-6.2.0+2/upstream/include",
                 "${workspaceFolder}/../Cryptid-debug/nlohmann-json-3.7.3/upstream/single_include",
                 "C:/mongo-cxx-driver",
+                "C:/Code/C++/vcpkg/packages/range-v3_x86-windows/include",
                 "C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/VC/Tools/MSVC/14.26.28801/ATLMFC/include",
                 "C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/VC/Tools/MSVC/14.26.28801/include",
                 "C:/Program Files (x86)/Windows Kits/NETFXSDK/4.8/include/um",

@@ -1,59 +1,90 @@
 #pragma once
 
 #include "shared.hxx"
+#include <exception>
 #include <fmt/format.h>
 #include <nlohmann/json.hpp>
 #include <optional>
 #include <string_view>
+#include <tuple>
 
 namespace Cryptid { namespace Map {
+	auto calculateRow(int sectorSlot, int hexIndex) -> int;
+	auto calculateColumn(int sectorSlot, int hexIndex) -> int;
+
 	class Hex {
 	public:
 		Hex() {}
-		Hex(int sector, TerrainType terrainType, std::optional<StructureType> structureType = std::nullopt,
-			std::optional<StructureColor> structureColor = std::nullopt, std::optional<AnimalTerritoryType> animalTerritoryType = std::nullopt)
-			: sector_{ sector }, terrainType_{ terrainType }, animalTerritoryType_{ animalTerritoryType } {
-			if (structureType.has_value()) {
-				structure_ = { structureColor.value(), structureType.value() };
-			}
+		explicit Hex(int sectorId, int index, TerrainType terrainType,
+			std::optional<AnimalTerritoryType> animalTerritoryType = std::nullopt)
+			: sectorId_{ sectorId }, index_{ index }, terrainType_{ terrainType }, animalTerritoryType_{
+				  animalTerritoryType
+			  } {}
+
+		// Setters
+
+		auto setStructure(StructureType type, StructureColor color) -> void {
+			structure_ = { color, type };
 		}
 
-	public:
-		int sector_;
+		auto setPosition(int sectorSlot) -> void {
+			row_ = calculateRow(sectorSlot, index_);
+			column_ = calculateColumn(sectorSlot, index_);
+			initialized_ = true;
+		}
+
+		// Getters
+
+		auto initialized() const noexcept -> bool {
+			return initialized_;
+		}
+
+		auto row() const noexcept -> int {
+			return row_;
+		}
+
+		auto column() const noexcept -> int {
+			return column_;
+		}
+
+		auto terrainType() const noexcept -> TerrainType {
+			return terrainType_;
+		}
+
+		auto hasStructure() const noexcept -> bool {
+			return structure_.has_value();
+		}
+
+		auto structure() const -> Structure {
+			if (!hasStructure()) {
+				throw std::runtime_error{ fmt::format("Hex {} in sector {} has no structure", index_, sectorId_) };
+			}
+			return structure_.value();
+		}
+
+		auto hasAnimalTerritory() const noexcept -> bool {
+			return animalTerritoryType_.has_value();
+		}
+
+		auto animalTerritoryType() const -> AnimalTerritoryType {
+			if (!hasAnimalTerritory()) {
+				throw std::runtime_error{ fmt::format(
+					"Hex {} in sector {} has no animal territory", index_, sectorId_) };
+			}
+			return animalTerritoryType_.value();
+		}
+
+	private:
+		bool initialized_ = false;
+		int sectorId_;
+		int sectorSlot_;
 		int index_;
 		int row_;
 		int column_;
 		TerrainType terrainType_;
-		std::optional<Structure> structure_;
 		std::optional<AnimalTerritoryType> animalTerritoryType_;
+		std::optional<Structure> structure_ = std::nullopt;
 	};
-
-	using nlohmann::json;
-
-	auto to_json(json& j, const Hex& hex) -> void {
-		j = json{ { "sector", hex.sector_ }, { "terrainType", hex.terrainType_ } };
-		if (hex.structure_.has_value()) {
-			const auto& structure = hex.structure_.value();
-			j.push_back({ "structureType", structure.type });
-			j.push_back({ "structureColor", structure.color });
-		}
-		if (hex.animalTerritoryType_.has_value()) {
-			j.push_back({ "animalTerritoryType", hex.animalTerritoryType_.value() });
-		}
-	}
-
-	auto from_json(const json& j, Hex& hex) -> void {
-		j.at("sector").get_to(hex.sector_);
-		j.at("terrainType").get_to(hex.terrainType_);
-		if (j.contains("structureType")) {
-			auto structureType = j.at("structureType").get<StructureType>();
-			auto structureColor = j.at("structureColor").get<StructureColor>();
-			hex.structure_ = Structure{ structureColor, structureType };
-		}
-		if (j.contains("animalTerritoryType")) {
-			hex.animalTerritoryType_ = j.at("animalTerritoryType").get<AnimalTerritoryType>();
-		}
-	}
 }}	 // namespace Cryptid::Map
 
 using namespace Cryptid::Map;
