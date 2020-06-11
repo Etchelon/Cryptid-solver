@@ -6,8 +6,6 @@
 #include <vector>
 
 namespace Cryptid { namespace Map {
-	constexpr int N_HEXES_PER_SECTOR = 18;
-
 	class SectorDefinition {
 	public:
 		SectorDefinition() {}

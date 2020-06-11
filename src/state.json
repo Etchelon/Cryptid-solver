@@ -4,38 +4,71 @@
     "sectors": [
         {
             "id": 1,
-            "slot": 1,
-            "flipped": true
-        },
-        {
-            "id": 2,
-            "slot": 4,
-            "flipped": false
-        },
-        {
-            "id": 3,
             "slot": 0,
             "flipped": false
         },
         {
-            "id": 4,
+            "id": 2,
+            "slot": 4,
+            "flipped": true
+        },
+        {
+            "id": 3,
             "slot": 5,
             "flipped": true
         },
         {
-            "id": 5,
+            "id": 4,
             "slot": 3,
             "flipped": false
         },
         {
-            "id": 6,
+            "id": 5,
             "slot": 2,
             "flipped": true
+        },
+        {
+            "id": 6,
+            "slot": 1,
+            "flipped": false
         }
     ],
-    "structures": [{
-        "type": 0,
-        "color": 0,
-        "hexId": "1-17"
-    }]
+    "structures": [
+        {
+            "type": 0,
+            "color": 2,
+            "slot": 0,
+            "hex": 9
+        },
+        {
+            "type": 1,
+            "color": 3,
+            "slot": 0,
+            "hex": 15
+        },
+        {
+            "type": 0,
+            "color": 3,
+            "slot": 4,
+            "hex": 8
+        },
+        {
+            "type": 1,
+            "color": 2,
+            "slot": 4,
+            "hex": 17
+        },
+        {
+            "type": 0,
+            "color": 1,
+            "slot": 5,
+            "hex": 5
+        },
+        {
+            "type": 1,
+            "color": 1,
+            "slot": 5,
+            "hex": 6
+        }
+    ]
 }

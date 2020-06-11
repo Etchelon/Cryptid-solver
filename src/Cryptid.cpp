@@ -45,11 +45,12 @@ auto main(int argc, char* argv[]) -> int {
 	auto mapStateFilePath = fs::current_path() / "src" / "state.json";
 	auto mapStateStr = readFile(mapStateFilePath);
 	auto mapState = json::parse(mapStateStr);
+
 	auto sectorsState = mapState.at("sectors").items();
 	for (const auto& [key, value] : sectorsState) {
 		auto sectorId = value.at("id").get<int>();
-		auto sectorSlot = value.at("slot").get<int>();
-		auto sectorFlipped = value.at("flipped").get<bool>();
+		auto slot = value.at("slot").get<int>();
+		auto flipped = value.at("flipped").get<bool>();
 
 		auto sectorIt = std::find_if(sectorDefs.begin(), sectorDefs.end(),
 			[sectorId](const SectorDefinition& sec) { return sec.id_ == sectorId; });
@@ -58,11 +59,13 @@ auto main(int argc, char* argv[]) -> int {
 		}
 
 		auto& sectorDef = *sectorIt;
-		std::for_each(
-			sectorDef.hexes_.begin(), sectorDef.hexes_.end(), [sectorSlot](Hex& h) { h.setPosition(sectorSlot); });
+		std::for_each(sectorDef.hexes_.begin(), sectorDef.hexes_.end(),
+			[slot, flipped](Hex& h) { h.setPosition(slot, flipped); });
 	}
 
-	nInitialized = std::count_if(
+	auto structures = mapState.at
+
+						  nInitialized = std::count_if(
 		sectorDefs.cbegin(), sectorDefs.cend(), [](const SectorDefinition& sec) { return sec.initialized(); });
 	std::cout << nInitialized << " elements initialized\n";
 

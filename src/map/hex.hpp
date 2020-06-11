@@ -30,9 +30,10 @@ namespace Cryptid { namespace Map {
 			structure_ = { color, type };
 		}
 
-		auto setPosition(int sectorSlot) -> void {
-			row_ = calculateRow(sectorSlot, index_);
-			column_ = calculateColumn(sectorSlot, index_);
+		auto setPosition(int sectorSlot, bool sectorFlipped) -> void {
+			auto index = sectorFlipped ? N_HEXES_PER_SECTOR - 1 - index_ : index_;
+			row_ = calculateRow(sectorSlot, index);
+			column_ = calculateColumn(sectorSlot, index);
 			initialized_ = true;
 		}
 
@@ -62,7 +63,7 @@ namespace Cryptid { namespace Map {
 			return structure_.has_value();
 		}
 
-		auto structure() const -> Structure {
+		auto structure() const -> const Structure& {
 			if (!hasStructure()) {
 				auto message = fmt::format("Hex {} in sector {} has no structure", index_, sectorId_);
 				throw std::runtime_error{ message };
