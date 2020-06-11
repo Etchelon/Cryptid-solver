@@ -72,6 +72,10 @@
         "thread": "cpp",
         "filesystem": "cpp",
         "codecvt": "cpp",
-        "ranges": "cpp"
+        "ranges": "cpp",
+        "compare": "cpp",
+        "random": "cpp",
+        "regex": "cpp",
+        "span": "cpp"
     }
 }

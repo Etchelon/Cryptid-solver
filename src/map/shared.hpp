@@ -3,6 +3,7 @@
 #include <string>
 
 namespace Cryptid { namespace Map {
+	constexpr int N_SECTORS = 6;
 	constexpr int N_HEXES_PER_SECTOR = 18;
 
 	enum class TerrainType

@@ -32,6 +32,8 @@ namespace Cryptid { namespace Map {
 
 		auto setPosition(int sectorSlot, bool sectorFlipped) -> void {
 			auto index = sectorFlipped ? N_HEXES_PER_SECTOR - 1 - index_ : index_;
+			index_ = index;
+			sectorSlot_ = sectorSlot;
 			row_ = calculateRow(sectorSlot, index);
 			column_ = calculateColumn(sectorSlot, index);
 			initialized_ = true;
@@ -41,6 +43,10 @@ namespace Cryptid { namespace Map {
 
 		auto id() const noexcept -> const std::string& {
 			return id_;
+		}
+
+		auto index() const noexcept -> int {
+			return index_;
 		}
 
 		auto initialized() const noexcept -> bool {

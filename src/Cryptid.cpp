@@ -30,44 +30,53 @@ auto main(int argc, char* argv[]) -> int {
 
 	using nlohmann::json;
 	auto jSectors = json::parse(sectorsStr);
-	std::vector<SectorDefinition> sectorDefs;
+	auto sectors = std::vector<SectorDefinition>{};
+	sectors.reserve(N_SECTORS);
 	for (const auto& jSector : jSectors.items()) {
 		auto sectorDef = jSector.value().get<SectorDefinition>();
-		sectorDefs.push_back(sectorDef);
+		sectors.push_back(sectorDef);
 	}
 
-	std::cout << sectorDefs.size() << " elements parsed\n";
+	std::cout << sectors.size() << " elements parsed\n";
 
-	int nInitialized = std::count_if(
-		sectorDefs.cbegin(), sectorDefs.cend(), [](const SectorDefinition& sec) { return sec.initialized(); });
+	int nInitialized =
+		std::count_if(sectors.cbegin(), sectors.cend(), [](const SectorDefinition& sec) { return sec.initialized(); });
 	std::cout << nInitialized << " elements initialized\n";
 
 	auto mapStateFilePath = fs::current_path() / "src" / "state.json";
 	auto mapStateStr = readFile(mapStateFilePath);
 	auto mapState = json::parse(mapStateStr);
 
-	auto sectorsState = mapState.at("sectors").items();
-	for (const auto& [key, value] : sectorsState) {
+	auto sectorStates = mapState.at("sectors").items();
+	for (const auto& [key, value] : sectorStates) {
 		auto sectorId = value.at("id").get<int>();
 		auto slot = value.at("slot").get<int>();
 		auto flipped = value.at("flipped").get<bool>();
 
-		auto sectorIt = std::find_if(sectorDefs.begin(), sectorDefs.end(),
-			[sectorId](const SectorDefinition& sec) { return sec.id_ == sectorId; });
-		if (sectorIt == sectorDefs.end()) {
-			throw std::runtime_error{ fmt::format("Sector with id {} not found among definitions", sectorId) };
-		}
-
-		auto& sectorDef = *sectorIt;
-		std::for_each(sectorDef.hexes_.begin(), sectorDef.hexes_.end(),
-			[slot, flipped](Hex& h) { h.setPosition(slot, flipped); });
+		auto& sectorDef = ld::find(sectors, [sectorId](const SectorDefinition& sec) { return sec.id() == sectorId; });
+		sectorDef.setInSlot(slot, flipped);
 	}
 
-	auto structures = mapState.at
+	auto structures = mapState.at("structures").items();
+	for (const auto& [key, value] : structures) {
+		auto slot = value.at("slot").get<int>();
+		auto type = value.at("type").get<StructureType>();
+		auto color = value.at("color").get<StructureColor>();
+		auto hex = value.at("hex").get<int>();
 
-						  nInitialized = std::count_if(
-		sectorDefs.cbegin(), sectorDefs.cend(), [](const SectorDefinition& sec) { return sec.initialized(); });
+		auto& sector = ld::find(sectors, [slot](const SectorDefinition& sec) { return sec.slot() == slot; });
+		sector.setStructure(type, color, hex);
+	}
+
+	nInitialized =
+		std::count_if(sectors.cbegin(), sectors.cend(), [](const SectorDefinition& sec) { return sec.initialized(); });
 	std::cout << nInitialized << " elements initialized\n";
+
+	std::vector<Hex> allHexes;
+	allHexes.reserve(N_SECTORS * N_HEXES_PER_SECTOR);
+	ld::each(sectors, [&allHexes](const SectorDefinition& sec) {
+		ld::constEach(sec.hexes(), [&allHexes](const Hex& hex) { allHexes.push_back(hex); });
+	});
 
 	return 0;
 }
