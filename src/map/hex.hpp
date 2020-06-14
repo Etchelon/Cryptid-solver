@@ -3,6 +3,7 @@
 #include "shared.hpp"
 #include <exception>
 #include <fmt/core.h>
+#include <iostream>
 #include <nlohmann/json.hpp>
 #include <optional>
 #include <string>
@@ -88,6 +89,8 @@ namespace Cryptid { namespace Map {
 			}
 			return animalTerritoryType_.value();
 		}
+
+		friend auto operator<<(std::ostream&, const Hex&) -> std::ostream&;
 
 	private:
 		bool initialized_ = false;

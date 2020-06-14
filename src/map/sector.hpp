@@ -25,7 +25,7 @@ namespace Cryptid { namespace Map {
 		}
 
 		auto setStructure(StructureType type, StructureColor color, int hexIndex) -> void {
-			auto& hex = ld::find(hexes_, [hexIndex](const Hex& hex) { return hex.index() == hexIndex; });
+			auto& hex = ld::first(hexes_, [hexIndex](const Hex& hex) { return hex.index() == hexIndex; });
 			hex.setStructure(type, color);
 		}
 

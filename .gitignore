@@ -46,3 +46,7 @@ build/
 *.exe
 *.out
 *.app
+
+# Visual Studio stuff
+.vs/
+*.suo

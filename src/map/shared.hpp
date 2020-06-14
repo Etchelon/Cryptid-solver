@@ -12,7 +12,8 @@ namespace Cryptid { namespace Map {
 		Forest,
 		Mountain,
 		Lake,
-		Swamp
+		Swamp,
+		Animal
 	};
 
 	inline auto toString(TerrainType type) -> std::string {

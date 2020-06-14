@@ -1,3 +1,5 @@
+#include "clues/clue.hpp"
+#include "map/logic.hpp"
 #include "map/sector.hpp"
 #include <algorithm>
 #include <exception>
@@ -53,7 +55,7 @@ auto main(int argc, char* argv[]) -> int {
 		auto slot = value.at("slot").get<int>();
 		auto flipped = value.at("flipped").get<bool>();
 
-		auto& sectorDef = ld::find(sectors, [sectorId](const SectorDefinition& sec) { return sec.id() == sectorId; });
+		auto& sectorDef = ld::first(sectors, [sectorId](const SectorDefinition& sec) { return sec.id() == sectorId; });
 		sectorDef.setInSlot(slot, flipped);
 	}
 
@@ -64,7 +66,7 @@ auto main(int argc, char* argv[]) -> int {
 		auto color = value.at("color").get<StructureColor>();
 		auto hex = value.at("hex").get<int>();
 
-		auto& sector = ld::find(sectors, [slot](const SectorDefinition& sec) { return sec.slot() == slot; });
+		auto& sector = ld::first(sectors, [slot](const SectorDefinition& sec) { return sec.slot() == slot; });
 		sector.setStructure(type, color, hex);
 	}
 
@@ -75,8 +77,20 @@ auto main(int argc, char* argv[]) -> int {
 	std::vector<Hex> allHexes;
 	allHexes.reserve(N_SECTORS * N_HEXES_PER_SECTOR);
 	ld::each(sectors, [&allHexes](const SectorDefinition& sec) {
-		ld::constEach(sec.hexes(), [&allHexes](const Hex& hex) { allHexes.push_back(hex); });
+		ld::each(sec.hexes(), [&allHexes](const Hex& hex) { allHexes.push_back(hex); });
 	});
+
+	ld::each(allHexes, [](const Hex& hex) { std::cout << hex << "\n"; });
+
+	auto mapHandler = MapHandler{};
+	mapHandler.set_hexes(allHexes);
+	auto h = mapHandler.getHexAt(0, 0);
+	if (h.has_value()) {
+		auto& hex = ld::get(h);
+		auto within1 = mapHandler.findHexesWithin(hex, 1);
+		std::cout << "Hexes within 1 of " << hex << ": \n";
+		ld::each(within1, [](const auto hexRef) { std::cout << hexRef.get() << "\n"; });
+	}
 
 	return 0;
 }

@@ -1,6 +1,7 @@
 [requires]
 fmt/6.2.1
 nlohmann_json/3.7.3
+ms-gsl/3.0.1
 
 [generators]
 cmake

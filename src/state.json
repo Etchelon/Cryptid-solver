@@ -1,74 +1,96 @@
 {
     "difficulty": 0,
-    "players": ["alpha", "beta", "gamma"],
+    "players": [
+        {
+            "name": "alpha",
+            "clue": {
+                "type": "Within2",
+                "animalTerritory": "Bear"
+            }
+        },
+        {
+            "name": "beta",
+            "clue": {
+                "type": "Within3",
+                "color": "Green"
+            }
+        },
+        {
+            "name": "gamma",
+            "clue": {
+                "type": "Within2",
+                "animalTerritory": "Puma"
+            }
+        }
+    ],
     "sectors": [
         {
             "id": 1,
             "slot": 0,
-            "flipped": false
-        },
-        {
-            "id": 2,
-            "slot": 4,
             "flipped": true
         },
         {
+            "id": 2,
+            "slot": 1,
+            "flipped": false
+        },
+        {
             "id": 3,
-            "slot": 5,
+            "slot": 3,
             "flipped": true
         },
         {
             "id": 4,
-            "slot": 3,
+            "slot": 5,
             "flipped": false
         },
         {
             "id": 5,
             "slot": 2,
-            "flipped": true
+            "flipped": false
         },
         {
             "id": 6,
-            "slot": 1,
-            "flipped": false
+            "slot": 4,
+            "flipped": true
         }
     ],
     "structures": [
         {
             "type": 0,
             "color": 2,
-            "slot": 0,
-            "hex": 9
-        },
-        {
-            "type": 1,
-            "color": 3,
-            "slot": 0,
-            "hex": 15
-        },
-        {
-            "type": 0,
-            "color": 3,
-            "slot": 4,
-            "hex": 8
-        },
-        {
-            "type": 1,
-            "color": 2,
-            "slot": 4,
-            "hex": 17
-        },
-        {
-            "type": 0,
-            "color": 1,
-            "slot": 5,
+            "slot": 2,
             "hex": 5
         },
         {
             "type": 1,
-            "color": 1,
+            "color": 3,
+            "slot": 2,
+            "hex": 7
+        },
+        {
+            "type": 0,
+            "color": 3,
             "slot": 5,
-            "hex": 6
+            "hex": 15
+        },
+        {
+            "type": 1,
+            "color": 2,
+            "slot": 3,
+            "hex": 13
+        },
+        {
+            "type": 0,
+            "color": 1,
+            "slot": 4,
+            "hex": 14
+        },
+        {
+            "type": 1,
+            "color": 1,
+            "slot": 2,
+            "hex": 2
         }
     ]
 }
