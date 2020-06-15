@@ -1,10 +1,16 @@
 #pragma once
 
+#include <nlohmann/json.hpp>
 #include <string>
 
-namespace Cryptid { namespace Map {
+namespace Cryptid {
 	constexpr int N_SECTORS = 6;
 	constexpr int N_HEXES_PER_SECTOR = 18;
+
+	template<typename T>
+	inline auto parseEnum(const std::string& type) -> T {
+		throw std::runtime_error{ "Not implemented." };
+	}
 
 	enum class TerrainType
 	{
@@ -15,6 +21,10 @@ namespace Cryptid { namespace Map {
 		Swamp,
 		Animal
 	};
+
+	NLOHMANN_JSON_SERIALIZE_ENUM(TerrainType,
+		{ { TerrainType::Desert, "Desert" }, { TerrainType::Forest, "Forest" }, { TerrainType::Mountain, "Mountain" },
+			{ TerrainType::Lake, "Lake" }, { TerrainType::Swamp, "Swamp" }, { TerrainType::Animal, "Animal" } })
 
 	inline auto toString(TerrainType type) -> std::string {
 		switch (type) {
@@ -39,6 +49,10 @@ namespace Cryptid { namespace Map {
 		White
 	};
 
+	NLOHMANN_JSON_SERIALIZE_ENUM(
+		StructureColor, { { StructureColor::Black, "Black" }, { StructureColor::Blue, "Blue" },
+							{ StructureColor::Green, "Green" }, { StructureColor::White, "White" } })
+
 	inline auto toString(StructureColor color) -> std::string {
 		switch (color) {
 		case StructureColor::Black:
@@ -58,6 +72,9 @@ namespace Cryptid { namespace Map {
 		StandingStone
 	};
 
+	NLOHMANN_JSON_SERIALIZE_ENUM(StructureType,
+		{ { StructureType::AbandonedShack, "AbandonedShack" }, { StructureType::StandingStone, "StandingStone" } })
+
 	inline auto toString(StructureType type) -> std::string {
 		switch (type) {
 		case StructureType::AbandonedShack:
@@ -73,6 +90,9 @@ namespace Cryptid { namespace Map {
 		Puma
 	};
 
+	NLOHMANN_JSON_SERIALIZE_ENUM(
+		AnimalTerritoryType, { { AnimalTerritoryType::Bear, "Bear" }, { AnimalTerritoryType::Puma, "Puma" } })
+
 	inline auto toString(AnimalTerritoryType type) -> std::string {
 		switch (type) {
 		case AnimalTerritoryType::Bear:
@@ -86,4 +106,4 @@ namespace Cryptid { namespace Map {
 		StructureColor color;
 		StructureType type;
 	};
-}}	 // namespace Cryptid::Map
+}	// namespace Cryptid

@@ -12,6 +12,8 @@ conan_basic_setup()
 add_executable(Cryptid-app
     src/Cryptid.cpp
     src/map/hex.cpp
+    src/map/sector.cpp
+    src/clues/clue.cpp
 )
 
 target_link_libraries(Cryptid-app ${CONAN_LIBS})

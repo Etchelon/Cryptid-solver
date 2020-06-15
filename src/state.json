@@ -5,21 +5,24 @@
             "name": "alpha",
             "clue": {
                 "type": "Within2",
-                "animalTerritory": "Bear"
+                "animalTerritory": "Bear",
+                "negated": false
             }
         },
         {
             "name": "beta",
             "clue": {
                 "type": "Within3",
-                "color": "Green"
+                "color": "Green",
+                "negated": false
             }
         },
         {
             "name": "gamma",
             "clue": {
                 "type": "Within2",
-                "animalTerritory": "Puma"
+                "animalTerritory": "Puma",
+                "negated": false
             }
         }
     ],

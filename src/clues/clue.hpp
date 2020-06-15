@@ -2,6 +2,8 @@
 
 #include "../map/hex.hpp"
 #include "../map/shared.hpp"
+#include <gsl/pointers>
+#include <nlohmann/json.hpp>
 #include <optional>
 #include <variant>
 
@@ -16,12 +18,15 @@ namespace Cryptid {
 		Within3
 	};
 
+	NLOHMANN_JSON_SERIALIZE_ENUM(ClueType, { { ClueType::Landscape, "Landscape" }, { ClueType::Within1, "Within1" },
+											   { ClueType::Within2, "Within2" }, { ClueType::Within3, "Within3" } })
+
 	class Clue {
 	public:
 		Clue(bool negated) : negated_{ negated } {}
 
 		virtual auto distance() const noexcept -> int = 0;
-		virtual auto isHexOk(const Hex& hex, const std::vector<Hex>& nearbyHexes) -> bool = 0;
+		virtual auto isHexOk(const Hex& hex, const std::vector<Hex>& nearbyHexes) const -> bool = 0;
 
 	protected:
 		bool negated_ = false;
@@ -33,11 +38,11 @@ namespace Cryptid {
 		explicit LandscapeClue(TerrainType terrainType1, TerrainType terrainType2, bool negated)
 			: Clue(negated), terrainType1_{ terrainType1 }, terrainType2_{ terrainType2 } {}
 
-		auto distance() const noexcept -> int {
+		auto distance() const noexcept -> int override {
 			return 0;
 		}
 
-		auto isHexOk(const Hex& hex, const std::vector<Hex>& nearbyHexes) const -> bool {
+		auto isHexOk(const Hex& hex, const std::vector<Hex>& nearbyHexes) const -> bool override {
 			throw 42;
 		}
 
@@ -107,4 +112,6 @@ namespace Cryptid {
 	private:
 		StructureColor color_;
 	};
+
+	auto from_json(const nlohmann::json& j, gsl::owner<Clue*>& clue) -> void;
 }	// namespace Cryptid

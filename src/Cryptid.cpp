@@ -6,6 +6,7 @@
 #include <filesystem>
 #include <fmt/core.h>
 #include <fstream>
+#include <gsl/pointers>
 #include <iostream>
 #include <nlohmann/json.hpp>
 #include <sstream>
@@ -24,6 +25,7 @@ auto readFile(const std::filesystem::path& path) -> std::string {
 }
 
 auto main(int argc, char* argv[]) -> int {
+	using namespace Cryptid;
 	using namespace Cryptid::Map;
 	namespace fs = std::filesystem;
 
@@ -90,6 +92,13 @@ auto main(int argc, char* argv[]) -> int {
 		auto within1 = mapHandler.findHexesWithin(hex, 1);
 		std::cout << "Hexes within 1 of " << hex << ": \n";
 		ld::each(within1, [](const auto hexRef) { std::cout << hexRef.get() << "\n"; });
+	}
+
+	auto players = mapState.at("players").items();
+	auto clues = std::vector<gsl::owner<Clue*>>{};
+	for (const auto& [key, value] : players) {
+		auto clue = value.at("clue").get<gsl::owner<Clue*>>();
+		clues.push_back(clue);
 	}
 
 	return 0;
