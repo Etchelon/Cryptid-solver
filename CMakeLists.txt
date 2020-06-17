@@ -11,6 +11,8 @@ conan_basic_setup()
 
 add_executable(Cryptid-app
     src/Cryptid.cpp
+    src/Solver.cpp
+    src/map/handler.cpp
     src/map/hex.cpp
     src/map/sector.cpp
     src/clues/clue.cpp

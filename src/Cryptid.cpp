@@ -1,5 +1,6 @@
+#include "Solver.hpp"
 #include "clues/clue.hpp"
-#include "map/logic.hpp"
+#include "map/handler.hpp"
 #include "map/sector.hpp"
 #include <algorithm>
 #include <exception>
@@ -41,11 +42,8 @@ auto main(int argc, char* argv[]) -> int {
 		sectors.push_back(sectorDef);
 	}
 
-	std::cout << sectors.size() << " elements parsed\n";
-
 	int nInitialized =
 		std::count_if(sectors.cbegin(), sectors.cend(), [](const SectorDefinition& sec) { return sec.initialized(); });
-	std::cout << nInitialized << " elements initialized\n";
 
 	auto mapStateFilePath = fs::current_path() / "src" / "state.json";
 	auto mapStateStr = readFile(mapStateFilePath);
@@ -74,7 +72,6 @@ auto main(int argc, char* argv[]) -> int {
 
 	nInitialized =
 		std::count_if(sectors.cbegin(), sectors.cend(), [](const SectorDefinition& sec) { return sec.initialized(); });
-	std::cout << nInitialized << " elements initialized\n";
 
 	std::vector<Hex> allHexes;
 	allHexes.reserve(N_SECTORS * N_HEXES_PER_SECTOR);
@@ -82,23 +79,24 @@ auto main(int argc, char* argv[]) -> int {
 		ld::each(sec.hexes(), [&allHexes](const Hex& hex) { allHexes.push_back(hex); });
 	});
 
-	ld::each(allHexes, [](const Hex& hex) { std::cout << hex << "\n"; });
+	// ld::each(allHexes, [](const Hex& hex) { std::cout << hex << "\n"; });
 
 	auto mapHandler = MapHandler{};
 	mapHandler.set_hexes(allHexes);
-	auto h = mapHandler.getHexAt(0, 0);
-	if (h.has_value()) {
-		auto& hex = ld::get(h);
-		auto within1 = mapHandler.findHexesWithin(hex, 1);
-		std::cout << "Hexes within 1 of " << hex << ": \n";
-		ld::each(within1, [](const auto hexRef) { std::cout << hexRef.get() << "\n"; });
-	}
 
 	auto players = mapState.at("players").items();
 	auto clues = std::vector<gsl::owner<Clue*>>{};
 	for (const auto& [key, value] : players) {
 		auto clue = value.at("clue").get<gsl::owner<Clue*>>();
 		clues.push_back(clue);
+	}
+
+	const auto solver = Solver{ mapHandler, clues };
+	const auto solution = solver.solve();
+	if (solution.has_value()) {
+		std::cout << "The solution is hex " << ld::get(solution) << "\n";
+	} else {
+		std::cout << "Solution not found!!\n";
 	}
 
 	return 0;

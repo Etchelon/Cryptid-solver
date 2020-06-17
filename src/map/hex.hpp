@@ -1,14 +1,11 @@
 #pragma once
 
-#include "shared.hpp"
+#include "../shared.hpp"
 #include <exception>
 #include <fmt/core.h>
-#include <iostream>
 #include <nlohmann/json.hpp>
 #include <optional>
 #include <string>
-#include <string_view>
-#include <tuple>
 
 namespace Cryptid { namespace Map {
 	auto calculateRow(int sectorSlot, int hexIndex) -> int;
@@ -105,5 +102,3 @@ namespace Cryptid { namespace Map {
 		std::optional<Structure> structure_ = std::nullopt;
 	};
 }}	 // namespace Cryptid::Map
-
-using namespace Cryptid::Map;

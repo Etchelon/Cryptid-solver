@@ -1,9 +1,41 @@
 #include "clue.hpp"
+#include "../lodash/lodash.hpp"
 #include <gsl/pointers>
 #include <variant>
 
 namespace Cryptid {
 	using namespace Map;
+
+	auto LandscapeClue::isHexOk(const Hex& hex, const std::vector<Hex>& allHexes) const -> bool {
+		const auto hexType = hex.terrainType();
+		return hexType == terrainType1_ || hexType == terrainType2_;
+	}
+
+	auto Within1Clue::isHexOk(const Hex& hex, const std::vector<Hex>& nearbyHexes) const -> bool {
+		return hex.terrainType() == terrainType_ || ld::any(nearbyHexes, [terrainType = terrainType_](const Hex& h) {
+			return h.terrainType() == terrainType;
+		});
+	}
+
+	auto Within2Clue::isHexOk(const Hex& hex, const std::vector<Hex>& nearbyHexes) const -> bool {
+		if (isStructure_) {
+			const auto predicate = [structureType = structureType_.value()](const Hex& h) {
+				return h.hasStructure() && h.structure().type == structureType;
+			};
+			return predicate(hex) || ld::any(nearbyHexes, predicate);
+		}
+
+		const auto predicate = [animalTerritoryType = animalTerritoryType_.value()](const Hex& h) {
+			return h.hasAnimalTerritory() && h.animalTerritoryType() == animalTerritoryType;
+		};
+		return predicate(hex) || ld::any(nearbyHexes, predicate);
+	}
+
+	auto Within3Clue::isHexOk(const Hex& hex, const std::vector<Hex>& nearbyHexes) const -> bool {
+		const auto predicate = [color = color_](
+								   const Hex& h) { return h.hasStructure() && h.structure().color == color; };
+		return predicate(hex) || ld::any(nearbyHexes, predicate);
+	}
 
 	using nlohmann::json;
 
@@ -28,9 +60,9 @@ namespace Cryptid {
 		case ClueType::Within2: {
 			std::variant<StructureType, AnimalTerritoryType> structureOrAnimalTerritoryType;
 			if (j.contains("structureType")) {
-				j.at("structureType").get<StructureType>();
+				structureOrAnimalTerritoryType = j.at("structureType").get<StructureType>();
 			} else {
-				j.at("animalTerritory").get<AnimalTerritoryType>();
+				structureOrAnimalTerritoryType = j.at("animalTerritory").get<AnimalTerritoryType>();
 			}
 			clue = new Within2Clue{ structureOrAnimalTerritoryType, negated };
 			break;

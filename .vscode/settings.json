@@ -78,6 +78,7 @@
         "regex": "cpp",
         "span": "cpp",
         "variant": "cpp",
-        "pointers": "cpp"
+        "pointers": "cpp",
+        "string_view": "cpp"
     }
 }

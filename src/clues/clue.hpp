@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../map/hex.hpp"
-#include "../map/shared.hpp"
+#include "../shared.hpp"
 #include <gsl/pointers>
 #include <nlohmann/json.hpp>
 #include <optional>
@@ -41,10 +41,7 @@ namespace Cryptid {
 		auto distance() const noexcept -> int override {
 			return 0;
 		}
-
-		auto isHexOk(const Hex& hex, const std::vector<Hex>& nearbyHexes) const -> bool override {
-			throw 42;
-		}
+		auto isHexOk(const Hex& hex, const std::vector<Hex>& nearbyHexes) const -> bool override;
 
 	private:
 		TerrainType terrainType1_;
@@ -59,10 +56,7 @@ namespace Cryptid {
 		auto distance() const noexcept -> int {
 			return 1;
 		}
-
-		auto isHexOk(const Hex& hex, const std::vector<Hex>& nearbyHexes) const -> bool {
-			throw 42;
-		}
+		auto isHexOk(const Hex& hex, const std::vector<Hex>& nearbyHexes) const -> bool override;
 
 	private:
 		TerrainType terrainType_;
@@ -85,10 +79,7 @@ namespace Cryptid {
 		auto distance() const noexcept -> int {
 			return 2;
 		}
-
-		auto isHexOk(const Hex& hex, const std::vector<Hex>& nearbyHexes) const -> bool {
-			throw 42;
-		}
+		auto isHexOk(const Hex& hex, const std::vector<Hex>& nearbyHexes) const -> bool override;
 
 	private:
 		bool isStructure_;
@@ -104,10 +95,7 @@ namespace Cryptid {
 		auto distance() const noexcept -> int {
 			return 3;
 		}
-
-		auto isHexOk(const Hex& hex, const std::vector<Hex>& nearbyHexes) const -> bool {
-			throw 42;
-		}
+		auto isHexOk(const Hex& hex, const std::vector<Hex>& nearbyHexes) const -> bool override;
 
 	private:
 		StructureColor color_;

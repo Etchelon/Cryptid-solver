@@ -25,6 +25,15 @@ namespace ld {
 	}
 
 	template<typename T, typename Predicate>
+	auto firstOrDefault(const std::vector<T>& vec, Predicate pred) -> NullableRef<T> {
+		auto it = std::find_if(vec.begin(), vec.end(), pred);
+		if (it == vec.end()) {
+			return std::nullopt;
+		}
+		return std::ref(const_cast<T&>(*it));
+	}
+
+	template<typename T, typename Predicate>
 	auto firstOrDefault(std::vector<T>& vec, Predicate pred) -> NullableRef<T> {
 		auto it = std::find_if(vec.begin(), vec.end(), pred);
 		if (it == vec.end()) {

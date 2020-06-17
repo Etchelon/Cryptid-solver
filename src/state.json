@@ -60,38 +60,38 @@
     ],
     "structures": [
         {
-            "type": 0,
-            "color": 2,
+            "type": "AbandonedShack",
+            "color": "Green",
             "slot": 2,
             "hex": 5
         },
         {
-            "type": 1,
-            "color": 3,
+            "type": "StandingStone",
+            "color": "White",
             "slot": 2,
             "hex": 7
         },
         {
-            "type": 0,
-            "color": 3,
+            "type": "AbandonedShack",
+            "color": "White",
             "slot": 5,
             "hex": 15
         },
         {
-            "type": 1,
-            "color": 2,
+            "type": "StandingStone",
+            "color": "Green",
             "slot": 3,
             "hex": 13
         },
         {
-            "type": 0,
-            "color": 1,
+            "type": "AbandonedShack",
+            "color": "Blue",
             "slot": 4,
             "hex": 14
         },
         {
-            "type": 1,
-            "color": 1,
+            "type": "StandingStone",
+            "color": "Blue",
             "slot": 2,
             "hex": 2
         }
